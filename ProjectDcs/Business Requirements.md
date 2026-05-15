@@ -1,69 +1,51 @@
-# Business Requirements - ksf_Roster
+# Business Requirements - ksf_FA_Roster
 
-## Project Overview
-Shift scheduling and employee availability - integrates with Calendar and Leave.
+## Document Information
+- **Module**: ksf_FA_Roster
+- **Version**: 1.0.0
+- **Date**: 2026-05-11
+- **Status**: Implemented
+- **Author**: KSFII Development Team
 
-## Problem Statement
-- Need fixed schedules (8-5)
-- Need flexible schedules (8 hours between 6am-6pm)
-- Need rotating shift schedules
-- Need to see employee availability for meeting invites
-- Need to catch coverage gaps
+---
 
-## Employee Schedule Types
+## 1. Project Overview
 
-### Fixed Schedule
-- Start/End time same every day
-- Example: 8:00 - 17:00
+ksf_FA_Roster is the FrontAccounting adapter for ksf_roster, providing FA-specific UI and database integration.
 
-### Flexible Schedule  
-- 8 hour day, can vary
-- Example: 7:00-15:00 OR 9:00-17:00
+---
 
-### Rotating Shift
-- Days/Weeks in sequence
-- Example: Day shift (M-W), Night shift (Th-Sat), Off (Sun-Tue)
+## 2. Adapter Pattern
 
-## Scope
+```
+ksf_roster (Business Logic)
+    ↓
+ksf_FA_Roster (FrontAccounting Adapter)
+    ↓
+    FrontAccounting UI
+```
 
-### Shift Templates
-- Name (e.g., "Day Shift", "Night Shift")
-- Start time
-- End time
-- Days of week
+---
 
-### Schedule Types
-- Fixed
-- Flexible  
-- Rotating
+## 3. Integration Points
 
-### Team Assignment
-- Assign schedule to teams
-- Override for individual employees
+| Component | FA Integration |
+|-----------|---------------|
+| hooks.php | Module registration, menu |
+| pages/ | UI pages |
+| src/ | Database adapters |
+| Integration/ | Data sync |
 
-### Calendar Integration
-- Daily schedule → Calendar "Available" blocks
-- Meeting invites check availability
-- iCal free/busy integration
+---
 
-### Leave Impact
-- Leave request warns if coverage gap
-- Flag critical shift positions
-- Allow override with approval
+## 4. Dependencies
 
-### Training Impact
-- Training scheduled during shift warns
-- Flag training conflicts
+| Module | Purpose |
+|--------|---------|
+| ksf_roster | Business logic |
+| ksf_FA_API | FA API utilities |
 
-## Schedule Fields
-- schedule_name
-- schedule_type (fixed/flexible/rotating)
-- default_start_time
-- default_end_time
-- rotation_days
+---
 
-## Integration
-- ksf_HRM: Employee schedule assignment
-- ksf_Leave: Leave approval checks coverage
-- ksf_Training: Training checks shift conflicts
-- ksf_Calendar: "Available" calendar entries
+*Document Version: 1.0.0*
+*Last Updated: 2026-05-11*
