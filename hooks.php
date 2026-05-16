@@ -5,9 +5,9 @@
 
 define('SS_ROSTER', 133 << 8);
 
-class hooks_fa_roster extends hooks {
-    var $module_name = 'fa_roster';
-    var $version = '1.0.0';
+class hooks_ksf_FA_Roster extends hooks {
+    var $module_name = 'ksf_FA_Roster';
+    var $version = '2.4.0';
 
     function install_options($app) {
         global $path_to_root;
@@ -34,6 +34,13 @@ class hooks_fa_roster extends hooks {
         $security_areas['SA_ROSTERDELETE'] = array(SS_ROSTER | 4, _("Delete Shifts"));
         $security_areas['SA_ROSTERPUBLISH'] = array(SS_ROSTER | 5, _("Publish Schedule"));
         return array($security_areas, $security_sections);
+    }
+
+    function install_extension($check_only=true) {
+        return true;
+    }
+
+    function install_tabs($app) {
     }
 
     function activate_extension($company, $check_only=true) {
