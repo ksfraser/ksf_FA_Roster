@@ -35,7 +35,7 @@ function get_weekly_shifts(string $start, string $end): ?object
 {
     global $db;
     $sql = "SELECT s.*, e.name FROM " . TB_PREF . "roster_shifts s
-        LEFT JOIN " . TB_PREF . "hr_employees e ON s.employee_id = e.id
+        LEFT JOIN " . TB_PREF . "ksf_roster_employees e ON s.employee_id = e.id
         WHERE s.date >= " . $db->escape($start) . " AND s.date <= " . $db->escape($end) . "
         ORDER BY e.name, s.date";
     return $db->query($sql);
@@ -62,7 +62,7 @@ function get_employee_shifts(int $employee_id, string $start, string $end): ?obj
 function get_employees_list(): ?object
 {
     global $db;
-    $sql = "SELECT id, name FROM " . TB_PREF . "hr_employees WHERE active = 1 ORDER BY name";
+    $sql = "SELECT id, name FROM " . TB_PREF . "ksf_roster_employees WHERE active = 1 ORDER BY name";
     return $db->query($sql);
 }
 
