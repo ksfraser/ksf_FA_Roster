@@ -8,7 +8,7 @@
 ```
 ksf_FA_Roster/
 ├── sql/
-│   ├── fa_roster_shifts.sql
+│   ├── ksf_roster_shifts.sql
 │   ├── fa_roster_assignments.sql
 │   └── fa_roster_time_slots.sql
 ├── includes/
