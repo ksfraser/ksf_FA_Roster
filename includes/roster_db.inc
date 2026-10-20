@@ -6,7 +6,7 @@
 function create_shift(int $employee_id, string $date, string $shift, string $start_time, string $end_time, string $notes = ''): int
 {
     global $db;
-    $sql = "INSERT INTO " . TB_PREF . "roster_shifts 
+    $sql = "INSERT INTO " . TB_PREF . "ksf_roster_shifts 
         (employee_id, date, shift, start_time, end_time, status, created_by, notes)
         VALUES (" . $employee_id . ", " . $db->escape($date) . ", " . $db->escape($shift) . ", " . $db->escape($start_time) . ", " . $db->escape($end_time) . ", 'Scheduled', " . user_id() . ", " . $db->escape($notes) . ")";
     $db->query($sql);
@@ -16,7 +16,7 @@ function create_shift(int $employee_id, string $date, string $shift, string $sta
 function get_shift(int $id): ?array
 {
     global $db;
-    $sql = "SELECT * FROM " . TB_PREF . "roster_shifts WHERE id = " . $id;
+    $sql = "SELECT * FROM " . TB_PREF . "ksf_roster_shifts WHERE id = " . $id;
     $result = $db->query($sql);
     if ($result && $db->num_rows($result) > 0) {
         return $db->fetch($result);
@@ -27,14 +27,14 @@ function get_shift(int $id): ?array
 function update_shift(int $id, int $employee_id, string $date, string $shift, string $start_time, string $end_time, string $notes = ''): bool
 {
     global $db;
-    $sql = "UPDATE " . TB_PREF . "roster_shifts SET employee_id = " . $employee_id . ", date = " . $db->escape($date) . ", shift = " . $db->escape($shift) . ", start_time = " . $db->escape($start_time) . ", end_time = " . $db->escape($end_time) . ", notes = " . $db->escape($notes) . " WHERE id = " . $id;
+    $sql = "UPDATE " . TB_PREF . "ksf_roster_shifts SET employee_id = " . $employee_id . ", date = " . $db->escape($date) . ", shift = " . $db->escape($shift) . ", start_time = " . $db->escape($start_time) . ", end_time = " . $db->escape($end_time) . ", notes = " . $db->escape($notes) . " WHERE id = " . $id;
     return $db->query($sql);
 }
 
 function get_weekly_shifts(string $start, string $end): ?object
 {
     global $db;
-    $sql = "SELECT s.*, e.name FROM " . TB_PREF . "roster_shifts s
+    $sql = "SELECT s.*, e.name FROM " . TB_PREF . "ksf_roster_shifts s
         LEFT JOIN " . TB_PREF . "ksf_roster_employees e ON s.employee_id = e.id
         WHERE s.date >= " . $db->escape($start) . " AND s.date <= " . $db->escape($end) . "
         ORDER BY e.name, s.date";
@@ -44,7 +44,7 @@ function get_weekly_shifts(string $start, string $end): ?object
 function get_employee_shift(int $employee_id, string $date): ?array
 {
     global $db;
-    $sql = "SELECT * FROM " . TB_PREF . "roster_shifts WHERE employee_id = " . $employee_id . " AND date = " . $db->escape($date);
+    $sql = "SELECT * FROM " . TB_PREF . "ksf_roster_shifts WHERE employee_id = " . $employee_id . " AND date = " . $db->escape($date);
     $result = $db->query($sql);
     if ($result && $db->num_rows($result) > 0) {
         return $db->fetch($result);
@@ -55,7 +55,7 @@ function get_employee_shift(int $employee_id, string $date): ?array
 function get_employee_shifts(int $employee_id, string $start, string $end): ?object
 {
     global $db;
-    $sql = "SELECT * FROM " . TB_PREF . "roster_shifts WHERE employee_id = " . $employee_id . " AND date >= " . $db->escape($start) . " AND date <= " . $db->escape($end) . " ORDER BY date";
+    $sql = "SELECT * FROM " . TB_PREF . "ksf_roster_shifts WHERE employee_id = " . $employee_id . " AND date >= " . $db->escape($start) . " AND date <= " . $db->escape($end) . " ORDER BY date";
     return $db->query($sql);
 }
 

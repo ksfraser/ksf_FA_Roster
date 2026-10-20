@@ -1,7 +1,11 @@
 -- Roster module database schema for FrontAccounting
 
 -- Main roster shifts table
-CREATE TABLE IF NOT EXISTS `fa_roster_shifts` (
+ALTER TABLE IF EXISTS `fa_roster_shifts` RENAME TO `0_ksf_roster_shifts`;
+ALTER TABLE IF EXISTS `fa_roster_availability` RENAME TO `0_ksf_roster_availability`;
+ALTER TABLE IF EXISTS `fa_roster_swaps` RENAME TO `0_ksf_roster_swaps`;
+
+CREATE TABLE IF NOT EXISTS `0_ksf_roster_shifts` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `employee_id` INT(11) NOT NULL,
     `date` DATE NOT NULL,
@@ -19,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `fa_roster_shifts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Employee availability
-CREATE TABLE IF NOT EXISTS `fa_roster_availability` (
+CREATE TABLE IF NOT EXISTS `0_ksf_roster_availability` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `employee_id` INT(11) NOT NULL,
     `date` DATE NOT NULL,
@@ -33,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `fa_roster_availability` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Shift swap requests
-CREATE TABLE IF NOT EXISTS `fa_roster_swaps` (
+CREATE TABLE IF NOT EXISTS `0_ksf_roster_swaps` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `from_shift_id` INT(11) NOT NULL,
     `to_shift_id` INT(11) DEFAULT NULL,
@@ -47,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `fa_roster_swaps` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Module version
-INSERT INTO `fa_modules` (`name`, `version`, `enabled`, `installed`) VALUES
+INSERT INTO `0_ksf_modules` (`name`, `version`, `enabled`, `installed`) VALUES
 ('Roster', '1.0.0', 1, NOW())
 ON DUPLICATE KEY UPDATE `version` = '1.0.0', `installed` = NOW();
 
