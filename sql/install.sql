@@ -50,11 +50,6 @@ CREATE TABLE IF NOT EXISTS `0_ksf_roster_swaps` (
     KEY `to_shift` (`to_shift_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Module version
-INSERT INTO `0_ksf_modules` (`name`, `version`, `enabled`, `installed`) VALUES
-('Roster', '1.0.0', 1, NOW())
-ON DUPLICATE KEY UPDATE `version` = '1.0.0', `installed` = NOW();
-
 -- ---------------------------------------------------------------------------
 -- Module-local employee directory.
 --
